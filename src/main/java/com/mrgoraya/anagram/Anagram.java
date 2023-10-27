@@ -5,6 +5,7 @@ import java.util.*;
 public class Anagram {
     private static final String YES = "yes";
     private static final String NO = "no";
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         AnagramService anagramService = new AnagramService();
@@ -66,6 +67,7 @@ public class Anagram {
                     List<String> anagrams = anagramService.searchForAnagrams(searchTextInput);
                     consoleOutput.printAnagrams(searchTextInput, anagrams);
                     consoleOutput.printMessage("Goodbye!");
+
                     return false;
                 } else {
                     throw new IllegalArgumentException("Invalid input. Please enter (" + YES + "/" + NO + ").");

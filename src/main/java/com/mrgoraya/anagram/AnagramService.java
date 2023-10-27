@@ -2,8 +2,6 @@ package main.java.com.mrgoraya.anagram;
 
 import java.util.*;
 
-import java.util.*;
-
 public class AnagramService {
     public final Map<String, Set<String>> anagramMap = new HashMap<>();
 
