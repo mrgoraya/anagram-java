@@ -7,8 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AnagramServiceTest {
     private AnagramService anagramService;
@@ -32,7 +31,7 @@ public class AnagramServiceTest {
 
     @Test
     public void testAreNotAnagrams() {
-        assertTrue(!anagramService.areAnagrams("hello", "world"));
+        assertFalse(anagramService.areAnagrams("hello", "world"));
     }
 
     @Test

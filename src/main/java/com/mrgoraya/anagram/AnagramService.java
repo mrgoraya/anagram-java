@@ -12,15 +12,19 @@ public class AnagramService {
         anagramMap.computeIfAbsent(sortedStr, k -> new HashSet<>()).add(inputStr);
     }
 
-    public boolean areAnagrams(String str1, String str2) {
-        return cleanAndSortInputString(str1).equals(cleanAndSortInputString(str2));
+    public boolean areAnagrams(String firstString, String secondString) {
+        return cleanAndSortInputString(firstString).equals(cleanAndSortInputString(secondString));
     }
 
     public List<String> searchForAnagrams(String searchTextInput) {
         String sortedSearchTextInput = cleanAndSortInputString(searchTextInput);
+
         Set<String> anagrams = anagramMap.getOrDefault(sortedSearchTextInput, new HashSet<>());
         anagrams.remove(searchTextInput);
-        return sortAndConvertToArrayList(anagrams);
+
+        List<String> sortedAnagrams = new ArrayList<>(anagrams);
+        Collections.sort(sortedAnagrams);
+        return sortedAnagrams;
     }
 
     private String cleanAndSortInputString(String inputString) {
@@ -28,12 +32,5 @@ public class AnagramService {
         char[] charArray = cleanedInput.toCharArray();
         Arrays.sort(charArray);
         return new String(charArray);
-    }
-
-    private List<String> sortAndConvertToArrayList(Iterable<String> collection) {
-        List<String> list = new ArrayList<>();
-        collection.forEach(list::add);
-        Collections.sort(list);
-        return list;
     }
 }

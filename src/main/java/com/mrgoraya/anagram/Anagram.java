@@ -3,6 +3,8 @@ package main.java.com.mrgoraya.anagram;
 import java.util.*;
 
 public class Anagram {
+    private static final String YES = "yes";
+    private static final String NO = "no";
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         AnagramService anagramService = new AnagramService();
@@ -10,13 +12,16 @@ public class Anagram {
         InputValidator inputValidator = new InputValidator();
 
         while (true) {
-            String inputStr1 = getUserInput(scanner, inputValidator, "Enter the string: ");
-            String inputStr2 = getUserInput(scanner, inputValidator, "Enter the next string: ");
+            // Get user input for the first and second strings
+            String firstInputString = getUserInput(scanner, inputValidator, "Enter the string: ");
+            String secondInputString = getUserInput(scanner, inputValidator, "Enter the next string: ");
 
-            if (anagramService.areAnagrams(inputStr1, inputStr2)) {
+            if (anagramService.areAnagrams(firstInputString, secondInputString)) {
                 consoleOutput.printMessage("These strings are anagrams!");
-                anagramService.precomputeAnagrams(inputStr1);
-                anagramService.precomputeAnagrams(inputStr2);
+
+                // Precompute anagrams for the first and second strings
+                anagramService.precomputeAnagrams(firstInputString);
+                anagramService.precomputeAnagrams(secondInputString);
             } else {
                 consoleOutput.printMessage("These strings are not anagrams!");
             }
@@ -33,6 +38,7 @@ public class Anagram {
             System.out.print(prompt);
             String inputStr = scanner.nextLine();
             try {
+                // Validate user input
                 inputValidator.validateInput(inputStr);
                 return inputStr;
             } catch (IllegalArgumentException e) {
@@ -48,18 +54,20 @@ public class Anagram {
             AnagramService anagramService
     ) {
         while (true) {
-            System.out.print("Do you want to check more anagrams? (yes/no): ");
+            System.out.print("Do you want to check more anagrams? (" + YES + "/" + NO + "): ");
             String choice = scanner.nextLine().toLowerCase();
-            if ("yes".equals(choice)) {
+            if (YES.equals(choice)) {
                 return true;
-            } else if ("no".equals(choice)) {
+            } else if (NO.equals(choice)) {
                 String searchTextInput = getUserInput(scanner, inputValidator, "Enter a text to find its anagrams: ");
+
+                // Search for anagrams and display results
                 List<String> anagrams = anagramService.searchForAnagrams(searchTextInput);
                 consoleOutput.printAnagrams(searchTextInput, anagrams);
                 consoleOutput.printMessage("Goodbye!");
                 return false;
             } else {
-                System.out.println("Invalid input. Please enter 'yes' or 'no'.");
+                System.out.print("Do you want to check more anagrams? (" + YES + "/" + NO + "): ");
             }
         }
     }
