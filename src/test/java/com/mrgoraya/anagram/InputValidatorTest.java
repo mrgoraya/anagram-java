@@ -22,8 +22,8 @@ public class InputValidatorTest {
     }
 
     @Test
-    public void testValidInputWithNumbers() {
-        String validInput = "abcdef123";
+    public void testValidInputWithSpecialCharacters() {
+        String validInput = "abcdef!!123";
         // No exception should be thrown.
         inputValidator.validateInput(validInput);
     }
